@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.claude/
+
+# raw scrape + logs
+KEMP_raw.html
+update.log
+
+# superseded scripts/outputs from earlier iterations
+fetch_kemp.py
+scrape_kemp_rain.py
+chart_kemp_rain.py
+run_update.cmd
+KEMP_observations.csv
+KEMP_obhistory.csv
+KEMP_rainfall.csv
+KEMP_rainfall.png
