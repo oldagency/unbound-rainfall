@@ -1,4 +1,5 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-22,22,11:53,E 5,2.50,Light Rain Fog/Mist,BKN004 BKN010 OVC034,64,62.1,,,93%,,,29.92,1012.9,0.16,,
 2026-05-22,22,10:53,E 3,4.00,Light Rain Fog/Mist,OVC004,63,62.1,,,97%,,,29.93,1013.1,0.02,,
 2026-05-22,22,09:53,NE 5,1.75,Heavy Rain Fog/Mist,OVC004,62.1,62.1,,,100%,,,29.93,1013.2,0.07,0.07,
 2026-05-22,22,08:53,Calm,8.00,Overcast,OVC006,63,61,,,93%,,,29.93,1013.2,,,
