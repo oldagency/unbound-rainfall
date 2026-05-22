@@ -150,9 +150,22 @@ def render_chart(all_rows: list[dict]) -> int:
     to avoid double-counting overlapping windows.
     """
     today_local = date.today()
-    cutoff_date = today_local - timedelta(days=CHART_DAYS - 1)
+    data_dates = {
+        ts.date()
+        for r in all_rows
+        if (ts := parse_ts(r)) is not None and ts.date() <= today_local
+    }
+    if not data_dates:
+        log("no data points yet; skipping chart")
+        return 0
+
+    earliest_data = min(data_dates)
+    # Chart starts at the oldest day with data; grows until it spans CHART_DAYS,
+    # then rolls forward as a 14-day window.
+    start_date = max(earliest_data, today_local - timedelta(days=CHART_DAYS - 1))
+    span = (today_local - start_date).days + 1
     totals: dict[date, float] = {
-        cutoff_date + timedelta(days=i): 0.0 for i in range(CHART_DAYS)
+        start_date + timedelta(days=i): 0.0 for i in range(span)
     }
 
     rows_used = 0
@@ -161,7 +174,7 @@ def render_chart(all_rows: list[dict]) -> int:
         if ts is None:
             continue
         d = ts.date()
-        if d < cutoff_date or d > today_local:
+        if d < start_date or d > today_local:
             continue
         if ts.minute < 50:
             continue  # skip SPECIs to avoid overlapping the :53 hourly METAR
@@ -188,7 +201,11 @@ def render_chart(all_rows: list[dict]) -> int:
                         ha="center", fontsize=9, color=bar_color,
                         weight="bold")
 
-    ax.set_title(f"KEMP — Emporia, KS  ·  Daily rainfall, last {CHART_DAYS} days",
+    if span >= CHART_DAYS:
+        title_span = f"last {CHART_DAYS} days"
+    else:
+        title_span = f"since {start_date.strftime('%b %d')} ({span} day{'s' if span != 1 else ''})"
+    ax.set_title(f"KEMP — Emporia, KS  ·  Daily rainfall, {title_span}",
                  fontsize=14, weight="bold", loc="left")
     fig.text(0.01, 0.94,
              f"Daily totals in inches  ·  Source: forecast.weather.gov/data/obhistory/{STATION}.html"
@@ -208,8 +225,9 @@ def render_chart(all_rows: list[dict]) -> int:
 
     total = sum(values)
     wet_days = sum(1 for v in values if v > 0)
+    summary_label = f"{span}-day" if span < CHART_DAYS else f"{CHART_DAYS}-day"
     ax.text(0.99, 0.95,
-            f"{CHART_DAYS}-day total:  {total:.2f}\"\n"
+            f"{summary_label} total:  {total:.2f}\"\n"
             f"Days with rain:  {wet_days}",
             transform=ax.transAxes, ha="right", va="top", fontsize=10,
             bbox=dict(facecolor="white", edgecolor="#ddd",
