@@ -142,73 +142,83 @@ def parse_ts(row: dict) -> datetime | None:
 
 
 def render_chart(all_rows: list[dict]) -> int:
-    cutoff = datetime.now() - timedelta(days=CHART_DAYS)
-    pts = []
+    """Render daily rainfall totals for the last CHART_DAYS days.
+
+    Sums the 1-hour precipitation values from each standard hourly observation
+    (METAR reports at minute :53) into daily buckets in local CDT. Each :53 row
+    reports rain that fell in the prior 60 minutes, so non-:53 SPECIs are skipped
+    to avoid double-counting overlapping windows.
+    """
+    today_local = date.today()
+    cutoff_date = today_local - timedelta(days=CHART_DAYS - 1)
+    totals: dict[date, float] = {
+        cutoff_date + timedelta(days=i): 0.0 for i in range(CHART_DAYS)
+    }
+
+    rows_used = 0
     for r in all_rows:
         ts = parse_ts(r)
-        if ts is None or ts < cutoff:
+        if ts is None:
             continue
-        pts.append((ts,
-                    to_float(r.get("Precip 1hr (in)", "")),
-                    to_float(r.get("Precip 3hr (in)", "")),
-                    to_float(r.get("Precip 6hr (in)", ""))))
-    pts.sort(key=lambda x: x[0])
-    if not pts:
-        log("no data points in the 14-day window; skipping chart")
-        return 0
-    times, p1, p3, p6 = zip(*pts)
+        d = ts.date()
+        if d < cutoff_date or d > today_local:
+            continue
+        if ts.minute < 50:
+            continue  # skip SPECIs to avoid overlapping the :53 hourly METAR
+        totals[d] = totals.get(d, 0.0) + to_float(r.get("Precip 1hr (in)", ""))
+        rows_used += 1
 
-    sns.set_theme(style="whitegrid", context="talk", font_scale=0.7)
-    palette = sns.color_palette("crest", 3)
-    fig, ax = plt.subplots(figsize=(14, 5.5))
+    days = sorted(totals.keys())
+    values = [totals[d] for d in days]
 
-    span_hours = (max(times) - min(times)).total_seconds() / 3600 or 1
-    width = max(0.005, min(0.05, 1 / max(24, span_hours / 4)))
+    sns.set_theme(style="whitegrid", context="talk", font_scale=0.75)
+    palette = sns.color_palette("crest", as_cmap=False, n_colors=6)
+    bar_color = palette[3]
+    dry_color = "#e6ecf0"
 
-    # Plot 6hr/3hr in back as wider, lighter bars; 1hr on top sharp & opaque.
-    ax.bar(times, p6, width=width * 4, color=palette[0], alpha=0.30,
-           label="6 hr", align="center", edgecolor="none")
-    ax.bar(times, p3, width=width * 2.2, color=palette[1], alpha=0.55,
-           label="3 hr", align="center", edgecolor="none")
-    ax.bar(times, p1, width=width, color=palette[2], alpha=1.0,
-           label="1 hr", align="center", edgecolor="white", linewidth=0.4)
+    fig, ax = plt.subplots(figsize=(13, 5))
+    colors = [bar_color if v > 0 else dry_color for v in values]
+    ax.bar(days, values, width=0.8, color=colors,
+           edgecolor="white", linewidth=0.6)
 
-    ax.set_title(f"KEMP — Emporia, KS  |  Rainfall, last {CHART_DAYS} days",
+    for d, v in zip(days, values):
+        if v > 0:
+            ax.annotate(f"{v:.2f}\"", xy=(d, v),
+                        xytext=(0, 4), textcoords="offset points",
+                        ha="center", fontsize=9, color=bar_color,
+                        weight="bold")
+
+    ax.set_title(f"KEMP — Emporia, KS  ·  Daily rainfall, last {CHART_DAYS} days",
                  fontsize=14, weight="bold", loc="left")
-    fig.text(0.01, 0.93,
-             f"Source: forecast.weather.gov/data/obhistory/{STATION}.html  "
-             f"· Updated {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+    fig.text(0.01, 0.94,
+             f"Daily totals in inches  ·  Source: forecast.weather.gov/data/obhistory/{STATION}.html"
+             f"  ·  Updated {datetime.now().strftime('%Y-%m-%d %H:%M')}",
              fontsize=8, color="#666")
     ax.set_xlabel("")
-    ax.set_ylabel("Precipitation (in)")
+    ax.set_ylabel("Rainfall (in)")
     ax.xaxis.set_major_locator(mdates.DayLocator())
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%b %d"))
-    ax.xaxis.set_minor_locator(mdates.HourLocator(byhour=[0, 6, 12, 18]))
-    ax.grid(True, axis="y", linestyle="-", alpha=0.35)
-    ax.grid(True, axis="x", which="major", linestyle="-", alpha=0.25)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%a\n%b %d"))
+    ax.set_xlim(days[0] - timedelta(days=0.5), days[-1] + timedelta(days=0.5))
+    ymax = max(values) if values else 0.0
+    ax.set_ylim(0, max(0.1, ymax * 1.25))
     sns.despine(ax=ax, left=True)
     ax.tick_params(axis="y", left=False)
-    ax.legend(loc="upper left", frameon=False, ncol=3)
+    ax.grid(True, axis="y", linestyle="-", alpha=0.35)
+    ax.grid(False, axis="x")
 
-    for ts, v in zip(times, p1):
-        if v > 0:
-            ax.annotate(f"{v:.2f}", xy=(ts, v),
-                        xytext=(0, 4), textcoords="offset points",
-                        ha="center", fontsize=7, color=palette[2])
-
-    total_1hr = sum(p1)
-    nonzero = sum(1 for v in p1 if v > 0)
+    total = sum(values)
+    wet_days = sum(1 for v in values if v > 0)
     ax.text(0.99, 0.95,
-            f"Σ 1-hr values: {total_1hr:.2f} in\n"
-            f"Hours w/ precip: {nonzero}",
-            transform=ax.transAxes, ha="right", va="top", fontsize=9,
-            bbox=dict(facecolor="white", edgecolor="#ddd", boxstyle="round,pad=0.4"))
+            f"{CHART_DAYS}-day total:  {total:.2f}\"\n"
+            f"Days with rain:  {wet_days}",
+            transform=ax.transAxes, ha="right", va="top", fontsize=10,
+            bbox=dict(facecolor="white", edgecolor="#ddd",
+                      boxstyle="round,pad=0.5"))
 
-    fig.autofmt_xdate()
     fig.tight_layout(rect=(0, 0, 1, 0.92))
     fig.savefig(CHART_PNG, dpi=140, facecolor="white")
     plt.close(fig)
-    return len(pts)
+    return rows_used
 
 
 def main() -> int:
