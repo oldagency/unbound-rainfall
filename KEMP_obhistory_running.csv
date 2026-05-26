@@ -1,4 +1,8 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-26,26,07:53,S 9,10.00,Fair,CLR,66,61,,,84%,,,29.99,1014.9,,,
+2026-05-26,26,06:53,S 7,10.00,Fair,CLR,61,59,64.9,60.1,93%,,,29.99,1014.7,,,
+2026-05-26,26,05:53,S 7,10.00,Fair,CLR,61,57.9,,,90%,,,29.97,1014.1,,,
+2026-05-26,26,04:53,S 7,10.00,Fair,CLR,60.1,57.9,,,93%,,,29.97,1014.0,,,
 2026-05-26,26,03:53,SE 6,10.00,Fair,CLR,60.1,59,,,96%,,,29.97,1014.2,,,
 2026-05-26,26,02:53,S 3,10.00,Fair,CLR,63,60.1,,,90%,,,29.97,1014.0,,,
 2026-05-26,26,01:53,S 5,10.00,Fair,CLR,64,59,,,84%,,,29.98,1014.2,,,
