@@ -1,4 +1,10 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-27,27,19:53,E 9,10.00,Fair,CLR,77,63,,,62%,,79,29.94,1013.2,,,
+2026-05-27,27,18:53,SE 7,10.00,A Few Clouds,FEW110,80.1,63,82.9,79,56%,,81,29.94,1013.0,,,
+2026-05-27,27,17:53,E 14,10.00,A Few Clouds,FEW045,79,64,,,60%,,81,29.94,1012.9,,,
+2026-05-27,27,16:53,E 15,10.00,Partly Cloudy,SCT045 SCT055,80.1,64,,,58%,,82,29.94,1013.0,,,
+2026-05-27,27,15:53,E 15,10.00,A Few Clouds,FEW060 FEW090,81,64.9,,,58%,,83,29.96,1013.6,,,
+2026-05-27,27,14:53,SE 12 G 20,10.00,A Few Clouds,FEW038,80.1,64.9,,,60%,,82,29.97,1014.0,,,
 2026-05-27,27,13:53,SE 12,10.00,Mostly Cloudy,SCT038 BKN046 BKN060,79,64.9,,,62%,,81,29.98,1014.6,,,
 2026-05-27,27,12:53,SE 15 G 22,10.00,Partly Cloudy,FEW032 SCT040,79,64.9,79,64,62%,,81,29.99,1014.7,,,
 2026-05-27,27,11:53,E 13,10.00,Mostly Cloudy,BKN034 BKN041 BKN120,78.1,64.9,,,64%,,80,30,1015.3,,,
