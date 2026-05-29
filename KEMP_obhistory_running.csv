@@ -1,4 +1,9 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-29,29,08:53,S 12,10.00,Overcast,OVC010,70,66.9,,,90%,,,29.95,1013.4,,,
+2026-05-29,29,07:53,S 12,10.00,Overcast,OVC010,70,66.9,,,90%,,,29.94,1013.1,,,
+2026-05-29,29,06:53,S 8,10.00,Light Rain,BKN009 BKN016 OVC023,69.1,66.9,70,69.1,93%,,,29.94,1013.1,,,
+2026-05-29,29,05:53,S 12,10.00,Overcast,OVC015,70,66.9,,,90%,,,29.93,1012.8,,,
+2026-05-29,29,04:53,S 6,10.00,Overcast,OVC009,69.1,66.9,,,93%,,,29.92,1012.6,,,
 2026-05-29,29,03:53,SE 8,10.00,Overcast,FEW011 OVC021,70,68,,,93%,,,29.93,1012.5,,,
 2026-05-29,29,02:53,SE 9,10.00,Overcast,SCT016 SCT024 OVC065,69.1,66.9,,,93%,,,29.93,1012.9,,,
 2026-05-29,29,01:53,SE 8,10.00,Mostly Cloudy,SCT012 SCT017 BKN023,70,66.9,,,90%,,,29.94,1013.1,,,
