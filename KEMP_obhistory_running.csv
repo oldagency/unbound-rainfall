@@ -1,4 +1,9 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-29,29,19:53,S 6,10.00,Partly Cloudy,SCT085,75,69.1,,,82%,,75,29.81,1008.5,,,
+2026-05-29,29,18:53,S 8,10.00,Fair,CLR,75.9,66.9,84,75,74%,,77,29.8,1008.3,,,
+2026-05-29,29,17:53,S 9,10.00,A Few Clouds,FEW045,80.1,66.9,,,64%,,82,29.82,1008.7,,,
+2026-05-29,29,16:53,S 15 G 20,10.00,Mostly Cloudy,SCT036 BKN046,82.9,70,,,65%,,87,29.82,1008.8,,,
+2026-05-29,29,15:53,S 13,10.00,Partly Cloudy,FEW034 SCT047,81,70,,,69%,,84,29.84,1009.4,,,
 2026-05-29,29,14:53,S 16 G 23,10.00,Mostly Cloudy,FEW029 SCT035 BKN060,81,69.1,,,67%,,84,29.86,1010.0,,,
 2026-05-29,29,13:53,S 12 G 22,10.00,Partly Cloudy,SCT025 SCT065,81,70,,,69%,,84,29.88,1010.7,,,
 2026-05-29,29,12:53,S 9,10.00,Partly Cloudy,FEW019 SCT090,79,69.1,79,69.1,72%,,82,29.9,1011.4,,,
