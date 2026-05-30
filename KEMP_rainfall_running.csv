@@ -1,4 +1,9 @@
 Date (full),Date (day),Time (cdt),Weather,Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-30,30,12:53,Thunderstorm in Vicinity Light Rain,0.13,,0.45
+2026-05-30,30,11:53,Thunderstorm Rain Fog/Mist,0.16,,
+2026-05-30,30,10:53,Thunderstorm in Vicinity Light Rain,0.06,,
+2026-05-30,30,09:53,Thunderstorm in Vicinity,,0.1,
+2026-05-30,30,08:53,Thunderstorm,0.1,,
 2026-05-30,30,06:53,Partly Cloudy,,,0.04
 2026-05-30,30,03:53,Thunderstorm in Vicinity,0.04,0.04,
 2026-05-29,29,00:53,Mostly Cloudy,,,0.01

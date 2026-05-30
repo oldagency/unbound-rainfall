@@ -1,4 +1,9 @@
 Date (full),Date (day),Time (cdt),Wind (mph),Vis (mi),Weather,Sky Cond,Air Temp (F),Dew Pt (F),6hr Max (F),6hr Min (F),Relative Humidity,Wind Chill (F),Heat Index (F),Altimeter (inHg),Sea Level (mb),Precip 1hr (in),Precip 3hr (in),Precip 6hr (in)
+2026-05-30,30,12:53,NW 6,10.00,Thunderstorm in Vicinity Light Rain,BKN100,70,68,75,69.1,93%,,,29.93,1012.8,0.13,,0.45
+2026-05-30,30,11:53,S 13,3.00,Thunderstorm Rain Fog/Mist,FEW055 BKN090 OVC110,70,69.1,,,97%,,,29.88,1010.9,0.16,,
+2026-05-30,30,10:53,SE 6 G 17,10.00,Thunderstorm in Vicinity Light Rain,FEW028 SCT090 SCT120,70,68,,,93%,,,29.87,1010.7,0.06,,
+2026-05-30,30,09:53,SE 9,10.00,Thunderstorm in Vicinity,SCT080,73,68,,,84%,,,29.88,1010.9,,0.1,
+2026-05-30,30,08:53,SE 7 G 18,10.00,Thunderstorm,FEW028 SCT075 OVC090,69.1,66,,,90%,,,29.87,1010.8,0.1,,
 2026-05-30,30,07:53,E 9,10.00,Overcast,OVC023,70,64.9,,,84%,,,29.87,1010.5,,,
 2026-05-30,30,06:53,NE 5,10.00,Partly Cloudy,SCT110,69.1,66,72,66.9,90%,,,29.85,1009.9,,,0.04
 2026-05-30,30,05:53,S 8,10.00,A Few Clouds,FEW120,68,63,,,84%,,,29.82,1008.8,,,
